@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+//Complete the following function.
+
+
+void calculate_the_maximum(int n, int k) {
+  //Write your code here.
+  int or_val=0,or_val_pk=0,and_val=0,and_val_pk=0,xor_val=0,xor_val_pk=0;
+  for(int i=1;i<n;i++)
+  {
+      for(int j=i+1;j<=n;j++)
+      {
+        or_val=(i|j);
+        if((or_val>or_val_pk) && (or_val<k))
+        {
+        or_val_pk=or_val;
+        }
+        xor_val=(i^j);
+        if((xor_val>xor_val_pk) && (xor_val<k))
+        {
+        xor_val_pk=xor_val;
+        }
+        and_val=(i&j);
+        if((and_val>and_val_pk) && (and_val<k))
+        {
+        and_val_pk=and_val;
+        }
+      }
+  }
+  printf("%d\n%d\n%d",and_val_pk,or_val_pk,xor_val_pk);
+}
+
+int main() {
+    int n, k;
+  
+    scanf("%d %d", &n, &k);
+    calculate_the_maximum(n, k);
+ 
+    return 0;
+}

@@ -1,0 +1,27 @@
+#include <stdio.h>
+/*
+Add `int max_of_four(int a, int b, int c, int d)` here.
+*/
+
+int max_of_four(int a1,int a2,int a3,int a4)
+{
+    int greatest_num=0;
+    if((a1>=a2) && (a1>=a3) && (a1>=a4))
+    greatest_num=a1;
+    else if((a2>=a1) && (a2>=a3) && (a2>=a4))
+    greatest_num=a2;
+    else if((a3>=a1) && (a3>=a2) && (a3>=a4))
+    greatest_num=a3;
+    else {
+    greatest_num=a4;
+    }
+    return greatest_num;
+}
+int main() {
+    int a, b, c, d;
+    scanf("%d %d %d %d", &a, &b, &c, &d);
+    int ans = max_of_four(a, b, c, d);
+    printf("%d", ans);
+    
+    return 0;
+}

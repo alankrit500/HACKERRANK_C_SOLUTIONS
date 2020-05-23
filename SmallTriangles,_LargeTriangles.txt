@@ -1,0 +1,36 @@
+
+void sort_by_area(triangle* tr, int n)  
+{
+    int *arr1=(int*)malloc(n*sizeof(int));
+    float semi_peri=0;
+    int temp1=0,temp2=0,temp3=0,rev=0,area_sq=0;
+    for(int i=0;i<n;i++)   
+    {
+        semi_peri=(float)(tr[i].a + tr[i].b + tr[i].c)/2;
+        area_sq=(semi_peri*(semi_peri-tr[i].a)*(semi_peri-tr[i].b)*(semi_peri-tr[i].c));
+        arr1[i]=area_sq;
+    }
+    for(int i=0;i<n;i++)    // Bubble Sort
+    {
+      for(int j=1;j<n-i;j++)
+      {
+          int temp=0;
+          if(arr1[j-1]>arr1[j])
+          {
+              temp=arr1[j-1];
+              arr1[j-1]=arr1[j];
+              arr1[j]=temp;
+
+                temp1=tr[j].a;
+                temp2=tr[j].b;
+                temp3=tr[j].c;
+                tr[j].a=tr[j-1].a;
+                tr[j].b=tr[j-1].b;
+                tr[j].c=tr[j-1].c;  
+                tr[j-1].a=temp1;
+                tr[j-1].b=temp2;
+                tr[j-1].c=temp3;
+          }
+      }
+    }
+}

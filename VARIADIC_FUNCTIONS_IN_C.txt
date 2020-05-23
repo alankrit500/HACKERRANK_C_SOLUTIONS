@@ -1,0 +1,46 @@
+
+int  sum (int count,...) 
+{
+int sum_ans=0;
+va_list NUMBER_1;
+va_start(NUMBER_1,count);
+for(int i=0;i<count;i++)
+{
+    int add=va_arg(NUMBER_1,int);
+    sum_ans+=add;
+}
+va_end(NUMBER_1);
+return sum_ans;
+}
+
+int min(int count,...) 
+{
+int min_value=MAX_ELEMENT,test;
+va_list NUMBER_1;
+va_start(NUMBER_1,count);
+for(int i=0;i<count;i++)
+{   
+  test=va_arg(NUMBER_1,int);
+  if(test<min_value)
+  min_value=test;
+}    
+va_end(NUMBER_1);
+return min_value;
+}
+int max(int count,...) 
+{
+int max_ans=MIN_ELEMENT,test;
+va_list NUMBER_1;
+va_start(NUMBER_1,count);
+
+for(int i=0;i<count;i++)
+{
+        test=va_arg(NUMBER_1,int);
+        if(test>max_ans)
+        max_ans=test;    
+}
+
+va_end(NUMBER_1);
+return max_ans;
+}
+

@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() 
+{
+    int n,temp,print_temp,ind=0;
+    int while_print=0,while_post_print=0;
+    scanf("%d",&n);
+    int arr[2*n][2*n];
+    temp=n;
+    print_temp=n;
+  	// Complete the code to print the pattern.
+    for(int i=1;i<2*n;i++)
+    {
+        ind=i-1;
+        print_temp=n;
+        for(int j=1;j<2*n;j++)
+        {
+            if(i<j)
+            {
+               if(j<2*n-ind)
+               {
+               if(i<=n)
+                {
+                arr[i][j]=print_temp-ind;
+//              printf("%d ",print_temp-ind);
+                }     
+               }
+               else
+               {
+                   if(i<=n)
+                   {
+                   while_print=print_temp-ind;
+                    while(j<(2*n))
+                    {  
+                        while_print++;
+//                        printf("%d ",while_print); 
+                          arr[i][j]=while_print;
+                        j++;
+                    }
+                   }
+                   else if(i>n)
+                   {
+                    while_post_print=2+i-n;
+                    while(j<(2*n))
+                    {  
+//                        printf("%d ",while_post_print); 
+                          arr[i][j]=while_post_print;
+                        while_post_print++;  
+                        j++;
+                    }   
+                   }
+               }
+            }
+            // else if(i>j)
+            // {
+              
+
+            // }
+            else if(i==j)
+            {
+              if(i<n)
+              {
+ //              printf("%d ",temp);
+                 arr[i][j]=temp;
+               temp--;
+              }
+              else if(i==n)
+              {
+                temp=1;
+                arr[i][j]=temp;
+ //               printf("%d ",temp);
+              }
+              else if(i>n)
+              {
+                temp++;
+                arr[i][j]=temp;
+ //               printf("%d ",temp);
+              }
+            }
+        }
+  //      printf("\n");
+    }
+for(int i=2;i<2*n;i++)
+{
+    for(int j=1;j<i;j++)
+    {
+        arr[i][j]=arr[j][i];
+    }
+}
+for(int i=1;i<2*n;i++)
+{
+    for(int j=1;j<2*n;j++)
+    {
+        printf("%d ",arr[i][j]);
+    }
+    printf("\n");
+}
+    return 0;
+}

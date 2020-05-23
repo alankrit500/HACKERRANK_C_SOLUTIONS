@@ -1,0 +1,81 @@
+char**** get_document(char* text)
+{
+    char ****document;
+    int paragraphs = 1, sentences = 1, words = 1, i;
+    document = (char ****)malloc(sizeof(char ***));
+    document[0] = (char ***)malloc(sizeof(char **));
+    document[0][0] = (char **)malloc(sizeof(char *));
+    document[0][0][0] = text;  
+ // Inserted first word of the first sentence.
+ 
+    for(i=0;text[i+1] != 0;i++)
+    {
+        if(text[i+1] == '\n')  
+// If the next character is a paragraph change.
+            text[i++] = 0;    
+ // Ignore dot at time of paragraph change.
+        
+ 
+switch(text[i])
+{
+case '\n':
+document = (char ****)realloc(document, ++paragraphs * sizeof(char ***));
+sentences = 0; 
+// Just adding higher pointer capacity, so that original increment has relevance.
+ 
+case '.':
+document[paragraphs-1] = (char ***)realloc(document[paragraphs-1], ++sentences * sizeof(char **));
+words = 0;
+// Just adding higher pointer capacity, so that original increment has relevance.
+ 
+case ' ':
+document[paragraphs-1][sentences-1] = (char **)realloc(document[paragraphs-1][sentences-1], ++words * sizeof(char *));
+document[paragraphs-1][sentences-1][words-1] = &text[i+1];
+text[i] = 0;  // Make spaces NULL.
+ 
+break;
+/*
+NOTE : 
+------
+realloc() function:
+In realloc()function, address allocated to base pointer.
+eg - char **ptr;
+ptr=(char**)malloc(sizeof(char*);
+For adding 1 more word, increment double pointer.
+ptr=(char**)realloc(ptr,2*sizeof(char*));
+*/
+ 
+// alphabet : 1st Level Pointer.
+// word : 2nd Level Pointer. 
+// word : document[paragraph-1][sentences-1]=(char**)
+realloc(document[paragraphs-1]
+// [sentences-1],++words*sizeof(char*));
+// sentence : 3rd Level Pointer.
+// sentence : document[paragraphs-1]=(char***)realloc(document[paragraphs-1],++sentences*(sizeof(char**)));
+// paragraph : 4th Level Pointer.
+// paragraph : document = (char ****)realloc(document, ++paragraphs * sizeof(char ***));
+ 
+// Above things are required so that addresses parsed here make relevance.
+/* This means higher pointer addresses require to be adjusted on a  timely basis, so lower addresses do not have Memory Segmentation  Fault. */
+
+}
+    }
+ 
+    text[i] = 0;
+ 
+    return document;
+}
+ 
+char* kth_word_in_mth_sentence_of_nth_paragraph(char**** document, int k, int m, int n) {
+    return document[n-1][m-1][k-1];
+}
+ 
+char** kth_sentence_in_mth_paragraph(char**** document, int k, int m) { 
+    return document[m-1][k-1];
+}
+ 
+char*** kth_paragraph(char**** document, int k) {
+    return document[k-1];
+}
+ 
+ 
